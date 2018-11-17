@@ -1,0 +1,40 @@
+{
+    "name": "json-inline-doc",
+    "version": "1.0.0",
+    "description": "Add inline comments on stringified JSON, or generate from JSON schema",
+    "main": "./lib/index.js",
+    "typings": "./lib/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zhouhaoyu/json-inline-doc.git"
+    },
+    "scripts": {
+        "compile": "./node_modules/.bin/tsc -p src",
+        "test": "./node_modules/.bin/tslint -p ./src && ./node_modules/.bin/mocha ./lib/test/*test.js"
+    },
+    "keywords": [
+        "JSON",
+        "stringify",
+        "comment",
+        "schema"
+    ],
+    "author": "zhouhy",
+    "license": "MIT",
+    "engines": {
+        "node": ">=4.8.0"
+    },
+    "devDependencies": {
+        "@types/json-schema": "^7.0.1",
+        "@types/mocha": "^5.2.5",
+        "@types/node": "^10.12.8",
+        "json-schema-ref-parser": "^6.0.2",
+        "mocha": "^5.2.0",
+        "tslint": "^5.11.0",
+        "tslint-language-service": "^0.9.9",
+        "typescript": "^3.1.6"
+    },
+    "dependencies": {
+        "tslib": "^1.9.3",
+        "word-wrap": "^1.2.3"
+    }
+}
