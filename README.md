@@ -34,7 +34,7 @@ w.stringify({ name: 'Sample Cluster' }, null, 4);
 ```
 
 Output:
-```json
+```jsonc
 /**
  * @type object
  * @description Cluster Configuration
@@ -69,7 +69,7 @@ console.log(w.stringify({ test: [{ test2: 3 }, { test2: 4 }, 3, [5]] }, null, 4)
 ```
 
 Output:
-```json
+```jsonc
 // test
 {
     /**
