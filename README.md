@@ -104,9 +104,9 @@ API Documentation
 --------------------------
 All code is written in TypeScript which can be self-explanatory.
 
-## Writers
+### Writers
 
-### [JSONCommentWriterBase](src/jsonCommentWriterBase.ts)
+#### [JSONCommentWriterBase](src/jsonCommentWriterBase.ts)
 
 The abstract base class of all writers.
 
@@ -141,7 +141,7 @@ The abstract base class of all writers.
 * JSON stringify implementation is based on the following code: https://github.com/douglascrockford/JSON-js/blob/2a76286e00cdc1e98fbc9e9ec6589563a3a4c3bb/json2.js
 
 
-### [CustomCommentWriter](src/customCommentWriter.ts)
+#### [CustomCommentWriter](src/customCommentWriter.ts)
 
 A class of JSON comment writer which supports custom comments for fields specified by path.
 
@@ -160,7 +160,7 @@ A class of JSON comment writer which supports custom comments for fields specifi
 
 	Comments to be shown when the selector matches.
 
-### [SchemaMetadataWriter](src/schemaMetadataWriter.ts)
+#### [SchemaMetadataWriter](src/schemaMetadataWriter.ts)
 
 A class of JSON comment writer generating comments for fields specified in JSON schema.
 
@@ -182,9 +182,9 @@ A class of JSON comment writer generating comments for fields specified in JSON 
 
 	Please refer to the constructor of [JSONCommentWriterBase](#JSONCommentWriterBase).
 
-## Interfaces
+### Interfaces
 
-### [IJSONComment](src/types.ts)
+#### [IJSONComment](src/types.ts)
 
 Represents a single comment.
 
