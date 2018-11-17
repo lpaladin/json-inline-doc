@@ -2,6 +2,9 @@
 JSON Inline Doc
 ============================
 #### Add inline comments on stringified JSON, or generate from JSON schema
+
+Use case: Using JSON for configuration and provide inline documentation as comments for users.
+
 Note: JSON does not support comments. But some editors have the so-called 'JSON with comments' support.
 
 Installation:
