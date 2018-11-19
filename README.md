@@ -110,7 +110,7 @@ All code is written in TypeScript which can be self-explanatory.
 
 The abstract base class of all writers.
 
-`writer = new JSONCommentWriterBase(configuration)`
+**`writer = new JSONCommentWriterBase(configuration)`**
 * Note: The above line of code is only for explanation. This class is abstract - do not try to `new` a instance by yourself!
 * `configuration`: object (optional)
 	* `spaceAroundCommentSymbol`: boolean (default true)
@@ -135,7 +135,8 @@ The abstract base class of all writers.
 		Not supported if `space` when calling `stringify` is 0.
 		(Except for comments of root object)
 
-`writer.stringify(value, replacer, space)`
+
+**`writer.stringify(value, replacer, space)`**
 * Convert value to JSON string with comments.
 * The signature is the same as [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 * JSON stringify implementation is based on the following code: https://github.com/douglascrockford/JSON-js/blob/2a76286e00cdc1e98fbc9e9ec6589563a3a4c3bb/json2.js
@@ -145,10 +146,11 @@ The abstract base class of all writers.
 
 A class of JSON comment writer which supports custom comments for fields specified by path.
 
-`writer = new CustomCommentWriter(configuration)`
+**`writer = new CustomCommentWriter(configuration)`**
 * Please refer to the constructor of [JSONCommentWriterBase](#JSONCommentWriterBase).
 
-`writer.addComments(selector, comments)`
+
+**`writer.addComments(selector, comments)`**
 * Add custom `comments` to fields specified by `selector`.
 * `selector`: (string | number | undefined)[] (required)
 
@@ -164,7 +166,7 @@ A class of JSON comment writer which supports custom comments for fields specifi
 
 A class of JSON comment writer generating comments for fields specified in JSON schema.
 
-`writer = new SchemaMetadataWriter(schemaObject, commentGenerator, configuration)`
+**`writer = new SchemaMetadataWriter(schemaObject, commentGenerator, configuration)`**
 * Construct a new SchemaMetadataWriter.
 * `schemaObject`: [JSONSchema](https://json-schema.org/) (required)
 
@@ -182,30 +184,33 @@ A class of JSON comment writer generating comments for fields specified in JSON 
 
 	Please refer to the constructor of [JSONCommentWriterBase](#JSONCommentWriterBase).
 
-### Interfaces
+### Types
 
 #### [IJSONComment](src/types.ts)
 
-Represents a single comment.
+Represents a single comment. Can be an object or a string.
 
-* `type`: 'block' | 'line' | 'end' (required)
-
-	Type of the comment:
-    * `block` - block comment wrapped with '/\*' and '\*\/' before the item
-    * `line` - line comment beginning with '//' before the item
-    * `end` - line comment at the end of the item on the same line
-
-    `line` and `end` are not supported if `space` when calling `stringify` is 0.
-    (Except for comments of root object)
-* `content`: string or function (required)
+* When being a string:
 	
-	Content of the comment. Could be:
-     * A single-line or multi-line string
-     * A function to be called when stringifying the matched field.
-	 	* Signature: (matchedFieldPath: (string | number)[]) => string | undefined
-     	* Return `undefined` to omit.
-     * '*\/' will be escaped automatically if type is `block`.
+	The comment will be assumed to be a block comment (see below), and the string will be the content of comment.
+* When being an object:
+	* `type`: 'block' | 'line' | 'end' (required)
 
+		Type of the comment:
+		* `block` - block comment wrapped with '/\*' and '\*\/' before the item
+		* `line` - line comment beginning with '//' before the item
+		* `end` - line comment at the end of the item on the same line
+
+		`line` and `end` are not supported if `space` when calling `stringify` is 0.
+		(Except for comments of root object)
+	* `content`: string or function (required)
+		
+		Content of the comment. Could be:
+		* A single-line or multi-line string
+		* A function to be called when stringifying the matched field.
+			* Signature: (matchedFieldPath: (string | number)[]) => string | undefined
+			* Return `undefined` to omit.
+		* '*\/' will be escaped automatically if type is `block`.
 
 License
 --------------------------

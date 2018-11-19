@@ -3,7 +3,7 @@ import { JSONSchema4, JSONSchema6, JSONSchema7 } from 'json-schema';
 
 export type JSONCommentType = 'block' | 'line' | 'end';
 
-export interface IJSONComment {
+export type IJSONComment = {
     /**
      * @description Type of the comment:
      * * `block` - block comment wrapped with '/\*' and '\*\/' before the item
@@ -22,7 +22,7 @@ export interface IJSONComment {
      * '*\/' will be escaped automatically if type is `block`.
      */
     content: ((matchedFieldPath: (string | number)[]) => string | undefined) | string;
-}
+} | string;
 
 export interface IJSONCommentConfiguration {
     /**

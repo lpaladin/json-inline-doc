@@ -20,7 +20,7 @@ describe('mixed comments', () => {
     it('should generate correct comments', () => {
         const w: CustomCommentWriter = new CustomCommentWriter();
         w.addComments([], [{ type: 'line', content: 'test' }]);
-        w.addComments(['test'], [{ type: 'block', content: 'test2' }]);
+        w.addComments(['test'], ['test2']);
         w.addComments(['test', 1], [{ type: 'end', content: 'test3' }]);
         w.addComments(['test', undefined, undefined], [{ type: 'line', content: 'test4' }]);
         w.addComments(['test', undefined, 'test2'], [{ type: 'block', content: path => path.toString() }]);

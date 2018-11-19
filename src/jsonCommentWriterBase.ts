@@ -80,6 +80,9 @@ export abstract class JSONCommentWriterBase<CommentDataNodeType> {
     protected abstract getComments(currentNode: Readonly<CommentDataNodeType>): IJSONComment[];
 
     private renderComment(gap: string, path: (string | number)[], comment: IJSONComment): string | undefined {
+        if (typeof comment === 'string') {
+            comment = { type: 'block', content: comment };
+        }
         let content: string | undefined = typeof comment.content === 'function' ? comment.content(path.slice(1)) : comment.content;
         if (content === undefined) {
             return undefined;
@@ -136,11 +139,11 @@ ${gap} */`;
         this.path.push(nextKey);
         if (nextNode) {
             for (const comment of this.getComments(nextNode)) {
-                if (comment.type === 'end' && lineEndComment !== undefined) {
+                if (typeof comment === 'object' && comment.type === 'end' && lineEndComment !== undefined) {
                     throw new Error('Comment of type `end` is expected to be unique for each field');
                 }
                 const commentString: string | undefined = this.renderComment(gap, this.path, comment);
-                if (comment.type === 'end') {
+                if (typeof comment === 'object' && comment.type === 'end') {
                     lineEndComment = commentString;
                 } else if (commentString !== undefined) {
                     parts.push(commentString);
