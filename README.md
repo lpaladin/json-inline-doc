@@ -3,6 +3,11 @@ JSON Inline Doc
 ============================
 #### Add inline comments on stringified JSON (JSONC), or generate from JSON schema
 
+[![](https://img.shields.io/npm/v/json-inline-doc.svg)](https://www.npmjs.com/package/json-inline-doc)
+[![](https://img.shields.io/david/zhouhaoyu/json-inline-doc.svg)](https://david-dm.org/zhouhaoyu/json-inline-doc)
+[![](https://img.shields.io/bundlephobia/min/json-inline-doc.svg)](https://www.npmjs.com/package/json-inline-doc)
+[![](https://img.shields.io/bundlephobia/minzip/json-inline-doc.svg)](https://www.npmjs.com/package/json-inline-doc)
+
 Use case: Using JSON for configuration and provide inline documentation as comments for users.
 
 JSONC is JSON with JavaScript style comments. Please note that original JSON does not support comments.
