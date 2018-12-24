@@ -24,8 +24,10 @@ describe('line comments', () => {
     "test": [
         // test4
         1,
+
         // test3
         2,
+
         // test4
         3
     ]
@@ -40,7 +42,10 @@ describe('line comments', () => {
     });
 
     it('should reflect changes in configuration', () => {
-        const w: CustomCommentWriter = new CustomCommentWriter({ spaceAroundCommentSymbol: false });
+        const w: CustomCommentWriter = new CustomCommentWriter({
+            emptyLineBeforeComments: false,
+            spaceAroundCommentSymbol: false
+        });
         w.addComments([], [{ type: 'line', content: 'test' }]);
         w.addComments(['test'], [{ type: 'line', content: 'test2' }]);
         w.addComments(['test', 1], [{ type: 'line', content: 'test3' }]);

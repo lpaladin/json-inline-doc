@@ -1,7 +1,7 @@
 {
     "name": "json-inline-doc",
-    "version": "1.0.2",
-    "description": "Add inline comments on stringified JSON, or generate from JSON schema",
+    "version": "2.0.0",
+    "description": "Add inline comments on stringified JSON (JSONC), or generate from JSON schema",
     "main": "./lib/index.js",
     "typings": "./lib/index.d.ts",
     "repository": {

@@ -26,6 +26,17 @@ export type IJSONComment = {
 
 export interface IJSONCommentConfiguration {
     /**
+     * @description Add a blank line before every `block` and `line` comment,
+     * except comments of the followings:
+     * * The root object
+     * * The first item in array
+     * * The first key-value pair in object
+     * Not supported if `space` when calling `stringify` is 0.
+     *
+     * @default true
+     */
+    emptyLineBeforeComments: boolean;
+    /**
      * @description Add space around '//', '/\*' and '\*\/'.
      * '/\*' and '\*\/' will not be affected by this
      * configuration if `styledBlockComment` is true.

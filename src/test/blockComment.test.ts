@@ -36,10 +36,12 @@ describe('block comments', () => {
          * test4
          */
         1,
+
         /**
          * test3
          */
         2,
+
         /**
          * test4
          */
@@ -59,8 +61,12 @@ describe('block comments', () => {
 }`);
     });
 
-    it('should reflect changes in configuration - no style and space', () => {
-        const w: CustomCommentWriter = new CustomCommentWriter({ spaceAroundCommentSymbol: false, styledBlockComment: false });
+    it('should reflect changes in configuration - no empty line, style and space', () => {
+        const w: CustomCommentWriter = new CustomCommentWriter({
+            emptyLineBeforeComments: false,
+            spaceAroundCommentSymbol: false,
+            styledBlockComment: false
+        });
         w.addComments([], [{ type: 'block', content: 'test' }]);
         w.addComments(['test'], [{ type: 'block', content: 'test2' }]);
         w.addComments(['test', 1], [{ type: 'block', content: 'test3' }]);
@@ -94,7 +100,7 @@ describe('block comments', () => {
 }`);
     });
 
-    it('should reflect changes in configuration - no style but with space', () => {
+    it('should reflect changes in configuration - no style but with empty line and space', () => {
         const w: CustomCommentWriter = new CustomCommentWriter({ styledBlockComment: false });
         w.addComments([], [{ type: 'block', content: 'test' }]);
         w.addComments(['test'], [{ type: 'block', content: 'test2' }]);
@@ -114,8 +120,10 @@ describe('block comments', () => {
     "test": [
         /* test4 */
         1,
+
         /* test3 */
         2,
+
         /* test4 */
         3
     ]

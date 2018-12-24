@@ -13,6 +13,7 @@ import {
  */
 export abstract class JSONCommentWriterBase<CommentDataNodeType> {
     private static readonly defaultConfiguration: IJSONCommentConfiguration = {
+        emptyLineBeforeComments: true,
         spaceAroundCommentSymbol: true,
         styledBlockComment: true,
         maxLineLength: 80
@@ -185,8 +186,7 @@ ${gap} */`;
                 return 'null';
             }
             const currGap: string = gap + this.indent;
-            const lineBreakCurrGap: string =
-                currGap ? '\n' + currGap : '';
+            const lineBreakCurrGap: string = currGap ? '\n' + currGap : '';
             const lineEndComments: { [index: number]: string } = {};
             const partial: string[] = [];
             const fnPartialToLine: (value: string, i: number) => string =
@@ -197,15 +197,27 @@ ${gap} */`;
                 }
                 for (let i: number = 0; i < value.length; i++) {
                     const { comments: parts, childJSON, lineEndComment } = this.getChildJSON(value, i, currGap, node);
-                    parts.push(childJSON || 'null');
+
                     if (lineEndComment !== undefined) {
                         lineEndComments[i] = lineEndComment;
                     }
-                    partial.push(parts.join(lineBreakCurrGap));
+
+                    parts.push(childJSON || 'null');
+                    const currentItemWithComments: string = parts.join(lineBreakCurrGap);
+
+                    if (this.configuration.emptyLineBeforeComments && i > 0 && parts.length > 1 && currGap) {
+                        // Not the first item in array && has comment && spaces != 0
+                        // Add a empty line
+                        partial.push(lineBreakCurrGap + currentItemWithComments);
+                    } else {
+                        partial.push(currGap + currentItemWithComments);
+                    }
                 }
-                return currGap ? `[
-${currGap}${partial.map(fnPartialToLine).join(lineBreakCurrGap)}
-${gap}]` : `[${partial.join(',')}]`;
+                return currGap
+                    ? `[
+${partial.map(fnPartialToLine).join('\n')}
+${gap}]`
+                    : `[${partial.join(',')}]`;
             } else {
                 const keys: (string | number)[] = Array.isArray(this.replacer) ? this.replacer : Object.keys(value);
                 if (keys.length === 0) {
@@ -214,16 +226,27 @@ ${gap}]` : `[${partial.join(',')}]`;
                 for (const k of keys) {
                     const { comments: parts, childJSON, lineEndComment } = this.getChildJSON(value, k, currGap, node);
                     if (childJSON) {
-                        parts.push(JSON.stringify(k) + (currGap ? ': ' : ':') + childJSON);
                         if (lineEndComment !== undefined) {
                             lineEndComments[partial.length] = lineEndComment;
                         }
-                        partial.push(parts.join(lineBreakCurrGap));
+
+                        parts.push(JSON.stringify(k) + (currGap ? ': ' : ':') + childJSON);
+                        const currentKVPairWithComments: string = parts.join(lineBreakCurrGap);
+
+                        if (this.configuration.emptyLineBeforeComments && partial.length > 0 && parts.length > 1 && currGap) {
+                            // Not the first key-value pair in object && has comment && spaces != 0
+                            // Add a empty line
+                            partial.push(lineBreakCurrGap + currentKVPairWithComments);
+                        } else {
+                            partial.push(currGap + currentKVPairWithComments);
+                        }
                     }
                 }
-                return currGap ? `{
-${currGap}${partial.map(fnPartialToLine).join(lineBreakCurrGap)}
-${gap}}` : `{${partial.join(',')}}`;
+                return currGap
+                    ? `{
+${partial.map(fnPartialToLine).join('\n')}
+${gap}}`
+                    : `{${partial.join(',')}}`;
             }
         } else {
             return JSON.stringify(value);

@@ -1,11 +1,11 @@
 
 JSON Inline Doc
 ============================
-#### Add inline comments on stringified JSON, or generate from JSON schema
+#### Add inline comments on stringified JSON (JSONC), or generate from JSON schema
 
 Use case: Using JSON for configuration and provide inline documentation as comments for users.
 
-Note: JSON does not support comments. But some editors have the so-called 'JSON with comments' support.
+JSONC is JSON with JavaScript style comments. Please note that original JSON does not support comments.
 
 Installation:
 --------------------------
@@ -113,6 +113,14 @@ The abstract base class of all writers.
 **`writer = new JSONCommentWriterBase(configuration)`**
 * Note: The above line of code is only for explanation. This class is abstract - do not try to `new` a instance by yourself!
 * `configuration`: object (optional)
+    * `emptyLineBeforeComments`: boolean (default true)
+
+		Add a blank line before every `block` and `line` comment, except comments of the followings:
+		* The root object
+		* The first item in array
+		* The first key-value pair in object
+
+    	Not supported if `space` when calling `stringify` is 0.
 	* `spaceAroundCommentSymbol`: boolean (default true)
 	
 		Add space around '//', '/\*' and '\*/'.

@@ -22,8 +22,10 @@ export const defaultCommentGenerator: CommentGenerator = (schema) => {
             }
         }
     }
-    return contents.length === 0 ? undefined : {
-        type: 'block',
-        content: contents.join('\n')
-    };
+    return contents.length === 0
+        ? undefined
+        : {
+            type: 'block',
+            content: contents.join('\n')
+        };
 };

@@ -41,10 +41,12 @@ export const TEST_SCHEMA_COMMENTED = `/**
      * @description Description of the schema
      */
     "description": "Cluster Configuration",
+
     /**
      * @description Type of the schema
      */
     "type": "object",
+
     /**
      * @type object
      * @description Available properties of the schema
@@ -60,6 +62,7 @@ export const TEST_SCHEMA_COMMENTED = `/**
              * @description Type of the schema
              */
             "type": "string",
+
             /**
              * @type string
              * @description Description of the schema
@@ -67,6 +70,7 @@ export const TEST_SCHEMA_COMMENTED = `/**
             "description": "Cluster name"
         }
     },
+
     /**
      * @type array
      * @default []
